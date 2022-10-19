@@ -14,6 +14,9 @@
       <div v-if="isLoading">Loading...</div>
       <div v-else>test user has been logged in</div>
       <div v-show="isLoading">Loading...</div>
+      <!-- TODO: 인풋 박스를 만들고 입력된 값을 p 태그에 출력 -->
+      <input type="text" v-model="text" />
+      <p>{{text}}</p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
@@ -21,6 +24,7 @@
       new Vue({
         el: "#app",
         data: {
+          text: "",
           num: 10,
           uuid: "abc1234",
           name: "text-blue",
