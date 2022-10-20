@@ -1,18 +1,23 @@
 <template>
-  <div>Input</div>
+  <div>
+    <input type="text" v-model="newTodoItem" />
+    <button @click="addTodo">add</button>
+  </div>
 </template>
 <script>
 export default {
-  components: {},
   data() {
     return {
-      sampleData: "",
+      newTodoItem: "",
     };
   },
-  setup() {},
-  created() {},
-  mounted() {},
-  unmounted() {},
-  methods: {},
+  methods: {
+    addTodo() {
+      console.log(this.newTodoItem);
+      // 저장하는 로직
+      localStorage.setItem(this.newTodoItem, this.newTodoItem);
+      this.newTodoItem = "";
+    },
+  },
 };
 </script>
