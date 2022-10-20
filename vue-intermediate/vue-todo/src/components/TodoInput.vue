@@ -1,7 +1,7 @@
 <template>
-  <div class="inputBox" shadow>
+  <div class="inputBox shadow">
     <input type="text" v-model="newTodoItem" @keyup.enter="addTodo" />
-    <button @click="addTodo">add</button>
+    <button class="addContainer" @click="addTodo">add</button>
     <!-- <span class="addContainer">
       <i class="fas fa-plus addBtn"></i>
     </span> -->
