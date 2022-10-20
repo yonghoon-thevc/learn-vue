@@ -2,7 +2,7 @@
   <div id="app">
     <TodoHeader></TodoHeader>
     <TodoInput></TodoInput>
-    <TodoList></TodoList>
+    <TodoList v-bind:propsData="todoItems"></TodoList>
     <TodoFooter></TodoFooter>
   </div>
 </template>
@@ -14,6 +14,23 @@ import TodoList from "./components/TodoList.vue";
 import TodoFooter from "./components/TodoFooter.vue";
 
 export default {
+  data() {
+    return {
+      todoItems: [],
+    };
+  },
+  // Vue 인스턴스가 생성될 때 호출, React useEffect와 비슷
+  created() {
+    if (localStorage.length > 0) {
+      for (let i = 0; i < localStorage.length; i += 1) {
+        if (localStorage.key(i) !== "loglevel:webpack-dev-server") {
+          this.todoItems.push(
+            JSON.parse(localStorage.getItem(localStorage.key(i)))
+          );
+        }
+      }
+    }
+  },
   components: {
     TodoHeader,
     TodoInput,

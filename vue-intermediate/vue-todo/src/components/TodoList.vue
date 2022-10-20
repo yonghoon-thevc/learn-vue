@@ -2,7 +2,7 @@
   <div>
     <ul>
       <li
-        v-for="(todoItem, index) in todoItems"
+        v-for="(todoItem, index) in propsData"
         v-bind:key="todoItem.item"
         class="shadow"
       >
@@ -24,11 +24,7 @@
 </template>
 <script>
 export default {
-  data() {
-    return {
-      todoItems: [],
-    };
-  },
+  props: ["propsData"],
   methods: {
     removeTodo(todoItem, index) {
       console.log(todoItem, index);
@@ -41,18 +37,6 @@ export default {
       localStorage.removeItem(todoItem.item);
       localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
     },
-  },
-  // Vue 인스턴스가 생성될 때 호출, React useEffect와 비슷
-  created() {
-    if (localStorage.length > 0) {
-      for (let i = 0; i < localStorage.length; i += 1) {
-        if (localStorage.key(i) !== "loglevel:webpack-dev-server") {
-          this.todoItems.push(
-            JSON.parse(localStorage.getItem(localStorage.key(i)))
-          );
-        }
-      }
-    }
   },
 };
 </script>
