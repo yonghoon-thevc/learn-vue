@@ -2,7 +2,7 @@
   <div>
     <transition-group name="list" tag="ul">
       <li
-        v-for="(todoItem, index) in propsData"
+        v-for="(todoItem, index) in this.$store.state.todoItems"
         :key="todoItem.item"
         class="shadow"
       >
