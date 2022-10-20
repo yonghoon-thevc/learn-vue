@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <TodoHeader></TodoHeader>
-    <TodoInput></TodoInput>
+    <TodoInput @addTodoItem="addOneItem"></TodoInput>
     <TodoList v-bind:propsData="todoItems"></TodoList>
     <TodoFooter></TodoFooter>
   </div>
@@ -18,6 +18,17 @@ export default {
     return {
       todoItems: [],
     };
+  },
+  methods: {
+    addOneItem(todoItem) {
+      const obj = {
+        completed: false,
+        item: todoItem,
+      };
+      // 저장하는 로직
+      localStorage.setItem(todoItem, JSON.stringify(obj));
+      this.todoItems.push(obj);
+    },
   },
   // Vue 인스턴스가 생성될 때 호출, React useEffect와 비슷
   created() {

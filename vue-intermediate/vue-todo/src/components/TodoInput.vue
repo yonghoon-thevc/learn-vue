@@ -2,9 +2,6 @@
   <div class="inputBox shadow">
     <input type="text" v-model="newTodoItem" @keyup.enter="addTodo" />
     <button class="addContainer" @click="addTodo">add</button>
-    <!-- <span class="addContainer">
-      <i class="fas fa-plus addBtn"></i>
-    </span> -->
   </div>
 </template>
 <script>
@@ -17,12 +14,7 @@ export default {
   methods: {
     addTodo() {
       if (this.newTodoItem !== "") {
-        const obj = {
-          completed: false,
-          item: this.newTodoItem,
-        };
-        // 저장하는 로직
-        localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
+        this.$emit("addTodoItem", this.newTodoItem);
         this.clearInput();
       }
     },
