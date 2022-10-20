@@ -1,9 +1,15 @@
 <template>
   <div>
     <ul>
-      <li v-for="todoItem in todoItems" v-bind:key="todoItem" class="shadow">
+      <li
+        v-for="(todoItem, index) in todoItems"
+        v-bind:key="todoItem"
+        class="shadow"
+      >
         {{ todoItem }}
-        <span class="removeBtn" @click="removeTodo"> 삭제 </span>
+        <span class="removeBtn" @click="removeTodo(todoItem, index)">
+          삭제
+        </span>
       </li>
     </ul>
   </div>
@@ -15,6 +21,13 @@ export default {
       todoItems: [],
     };
   },
+  methods: {
+    removeTodo(todoItem, index) {
+      console.log(todoItem, index);
+      localStorage.removeItem(todoItem);
+      this.todoItems.splice(index, 1);
+    },
+  },
   // Vue 인스턴스가 생성될 때 호출, React useEffect와 비슷
   created() {
     if (localStorage.length > 0) {
@@ -24,9 +37,6 @@ export default {
         }
       }
     }
-  },
-  methods: {
-    removeTodo() {},
   },
 };
 </script>
