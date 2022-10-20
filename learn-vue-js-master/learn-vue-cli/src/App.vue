@@ -1,7 +1,8 @@
 <template>
   <div>
     {{ str }}
-    <app-header></app-header>
+    <!-- <app-header v-bind:프롭스속성이름=""></app-header> -->
+    <app-header v-bind:propsdata="str"></app-header>
   </div>
 </template>
 <script>
@@ -13,7 +14,7 @@ export default {
   },
   data() {
     return {
-      str: "hi",
+      str: "Header",
     };
   },
   setup() {},
