@@ -9,7 +9,7 @@
         <span
           class="checkBtn"
           v-bind:class="{ checkBtnCompleted: todoItem.completed }"
-          @click="toggleComplete(todoItem)"
+          @click="toggleComplete(todoItem, index)"
           >체크</span
         >
         <span v-bind:class="{ textCompleted: todoItem.completed }">
@@ -29,11 +29,8 @@ export default {
     removeTodo(todoItem, index) {
       this.$emit("removeItem", todoItem, index);
     },
-    toggleComplete(todoItem) {
-      todoItem.completed = !todoItem.completed;
-      // localStorage 데이터 갱신, localStorage에 update는 없음
-      localStorage.removeItem(todoItem.item);
-      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+    toggleComplete(todoItem, index) {
+      this.$emit("toggleItem", todoItem, index);
     },
   },
 };

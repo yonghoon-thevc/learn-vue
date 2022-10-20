@@ -5,6 +5,7 @@
     <TodoList
       v-bind:propsData="todoItems"
       @removeItem="removeOneItem"
+      @toggleItem="toggleOneItem"
     ></TodoList>
     <TodoFooter></TodoFooter>
   </div>
@@ -35,6 +36,13 @@ export default {
     removeOneItem(todoItem, index) {
       localStorage.removeItem(todoItem.item);
       this.todoItems.splice(index, 1);
+    },
+    toggleOneItem(todoItem, index) {
+      // todoItem.completed = !todoItem.completed;
+      this.todoItems[index].completed = !this.todoItems[index].completed;
+      // localStorage 데이터 갱신, localStorage에 update는 없음
+      localStorage.removeItem(todoItem.item);
+      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
     },
   },
   // Vue 인스턴스가 생성될 때 호출, React useEffect와 비슷
