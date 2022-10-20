@@ -7,7 +7,7 @@
       @removeItem="removeOneItem"
       @toggleItem="toggleOneItem"
     ></TodoList>
-    <TodoFooter></TodoFooter>
+    <TodoFooter @clearAll="clearAllItems"></TodoFooter>
   </div>
 </template>
 
@@ -43,6 +43,10 @@ export default {
       // localStorage 데이터 갱신, localStorage에 update는 없음
       localStorage.removeItem(todoItem.item);
       localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+    },
+    clearAllItems() {
+      localStorage.clear();
+      this.todoItems = [];
     },
   },
   // Vue 인스턴스가 생성될 때 호출, React useEffect와 비슷
