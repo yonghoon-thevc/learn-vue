@@ -2,7 +2,10 @@
   <div id="app">
     <TodoHeader></TodoHeader>
     <TodoInput @addTodoItem="addOneItem"></TodoInput>
-    <TodoList v-bind:propsData="todoItems"></TodoList>
+    <TodoList
+      v-bind:propsData="todoItems"
+      @removeItem="removeOneItem"
+    ></TodoList>
     <TodoFooter></TodoFooter>
   </div>
 </template>
@@ -28,6 +31,10 @@ export default {
       // 저장하는 로직
       localStorage.setItem(todoItem, JSON.stringify(obj));
       this.todoItems.push(obj);
+    },
+    removeOneItem(todoItem, index) {
+      localStorage.removeItem(todoItem.item);
+      this.todoItems.splice(index, 1);
     },
   },
   // Vue 인스턴스가 생성될 때 호출, React useEffect와 비슷
