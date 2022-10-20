@@ -1,17 +1,21 @@
 <template>
   <div class="inputBox shadow">
     <input type="text" v-model="newTodoItem" @keyup.enter="addTodo" />
-    <button class="addContainer" @click="addTodo">add</button>
+    <span class="addContainer" @click="addTodo">할 일 추가</span>
 
-    <button id="show-modal" @click="showModal = true">Show Modal</button>
     <!-- use the modal component, pass in the prop -->
-    <Modal v-if="showModal" @close="showModal = false">
-      <h3 slot="header">custom header</h3>
-    </Modal>
+    <AlertModal v-if="showModal" @close="showModal = false">
+      <!-- slot: 일부 UI 재사용 가능, 모달 내용 재정의 -->
+      <h3 slot="header">
+        경고!
+        <span class="closeModalBtn" @click="showModal = false">확인</span>
+      </h3>
+      <h3 slot="body">아무것도 입력하지 않으셨습니다.</h3>
+    </AlertModal>
   </div>
 </template>
 <script>
-import Modal from "./common/Modal.vue";
+import AlertModal from "./common/AlertModal.vue";
 
 export default {
   data() {
@@ -26,7 +30,7 @@ export default {
         this.$emit("addTodoItem", this.newTodoItem);
         this.clearInput();
       } else {
-        alert("type sth");
+        this.showModal = !this.showModal;
       }
     },
     clearInput() {
@@ -34,7 +38,7 @@ export default {
     },
   },
   components: {
-    Modal,
+    AlertModal,
   },
 };
 </script>
@@ -65,5 +69,9 @@ input:focus {
 .addBtn {
   color: white;
   vertical-align: middle;
+}
+
+.closeModalBtn {
+  color: #42b983;
 }
 </style>
