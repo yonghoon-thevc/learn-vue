@@ -3,10 +3,18 @@
     <ul>
       <li
         v-for="(todoItem, index) in todoItems"
-        v-bind:key="todoItem"
+        v-bind:key="todoItem.item"
         class="shadow"
       >
-        {{ todoItem }}
+        <span
+          class="checkBtn"
+          v-bind:class="{ checkBtnCompleted: todoItem.completed }"
+          @click="toggleComplete(todoItem)"
+          >체크</span
+        >
+        <span v-bind:class="{ textCompleted: todoItem.completed }">
+          {{ todoItem.item }}</span
+        >
         <span class="removeBtn" @click="removeTodo(todoItem, index)">
           삭제
         </span>
@@ -27,13 +35,21 @@ export default {
       localStorage.removeItem(todoItem);
       this.todoItems.splice(index, 1);
     },
+    toggleComplete(todoItem) {
+      todoItem.completed = !todoItem.completed;
+      // localStorage 데이터 갱신, localStorage에 update는 없음
+      localStorage.removeItem(todoItem.item);
+      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+    },
   },
   // Vue 인스턴스가 생성될 때 호출, React useEffect와 비슷
   created() {
     if (localStorage.length > 0) {
       for (let i = 0; i < localStorage.length; i += 1) {
         if (localStorage.key(i) !== "loglevel:webpack-dev-server") {
-          this.todoItems.push(localStorage.key(i));
+          this.todoItems.push(
+            JSON.parse(localStorage.getItem(localStorage.key(i)))
+          );
         }
       }
     }
@@ -41,7 +57,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 ul {
   list-style-type: none;
   padding-left: 0px;
