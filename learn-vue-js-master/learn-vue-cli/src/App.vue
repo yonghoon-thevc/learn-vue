@@ -2,6 +2,10 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js App" />
+    <!-- 태그 작성 방식 -->
+    <!-- <hello-world></hello-world>
+    <HelloWorld></HelloWorld>
+    <HelloWorld /> -->
   </div>
 </template>
 
@@ -9,8 +13,10 @@
 import HelloWorld from "./components/HelloWorld.vue";
 
 export default {
+  // instance 옵션 속성 or component 옵션 속성
   name: "App",
   components: {
+    // 'hello-world': HelloWorld
     HelloWorld,
   },
 };
