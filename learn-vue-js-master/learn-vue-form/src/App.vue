@@ -1,28 +1,41 @@
 <template>
-  <form action="">
+  <form @submit.prevent="submitForm">
     <div>
-      <label for="userName">id: </label>
-      <input id="userName" type="text" />
+      <label for="username">id: </label>
+      <input id="username" type="text" v-model="username" />
     </div>
     <div>
       <label for="password">pw: </label>
-      <input id="password" type="password" />
+      <input id="password" type="password" v-model="password" />
     </div>
-    <button>login</button>
+    <button type="submit">login</button>
   </form>
 </template>
 <script>
+import axios from "axios";
+
 export default {
-  components: {},
   data() {
     return {
-      sampleData: "",
+      username: "",
+      password: "",
     };
   },
-  setup() {},
-  created() {},
-  mounted() {},
-  unmounted() {},
-  methods: {},
+  methods: {
+    submitForm() {
+      // event.preventDefault();
+      console.log(this.username, this.password);
+      const url = "https://jsonplaceholder.typicode.com/users";
+      const data = {
+        username: this.username,
+        password: this.password,
+      };
+
+      axios
+        .post(url, data)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    },
+  },
 };
 </script>
