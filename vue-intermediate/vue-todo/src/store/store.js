@@ -1,5 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import * as getters from "./getters";
+import * as mutations from "./mutations";
 
 Vue.use(Vuex);
 
@@ -23,35 +25,6 @@ export const store = new Vuex.Store({
   state: {
     todoItems: storage.fetch(),
   },
-  getters: {
-    storedTodoItems(state) {
-      return state.todoItems;
-    },
-  },
-  mutations: {
-    addOneItem(state, todoItem) {
-      const obj = {
-        completed: false,
-        item: todoItem,
-      };
-      // 저장하는 로직
-      localStorage.setItem(todoItem, JSON.stringify(obj));
-      state.todoItems.push(obj);
-    },
-    removeOneItem(state, { todoItem, index }) {
-      localStorage.removeItem(todoItem.item);
-      state.todoItems.splice(index, 1);
-    },
-    toggleOneItem(state, { todoItem, index }) {
-      // todoItem.completed = !todoItem.completed;
-      state.todoItems[index].completed = !state.todoItems[index].completed;
-      // localStorage 데이터 갱신, localStorage에 update는 없음
-      localStorage.removeItem(todoItem.item);
-      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
-    },
-    clearAllItems(state) {
-      localStorage.clear();
-      state.todoItems = [];
-    },
-  },
+  getters,
+  mutations,
 });
