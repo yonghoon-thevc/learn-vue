@@ -9,13 +9,13 @@
         <span
           class="checkBtn"
           v-bind:class="{ checkBtnCompleted: todoItem.completed }"
-          @click="toggleComplete(todoItem, index)"
+          @click="toggleComplete({ todoItem, index })"
           >체크</span
         >
         <span v-bind:class="{ textCompleted: todoItem.completed }">
           {{ todoItem.item }}</span
         >
-        <span class="removeBtn" @click="removeTodo(todoItem, index)">
+        <span class="removeBtn" @click="removeTodo({ todoItem, index })">
           삭제
         </span>
       </li>
@@ -24,18 +24,23 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   methods: {
-    removeTodo(todoItem, index) {
-      // this.$emit("removeItem", todoItem, index);
-      this.$store.commit("removeOneItem", { todoItem, index });
-    },
-    toggleComplete(todoItem, index) {
-      // this.$emit("toggleItem", todoItem, index);
-      this.$store.commit("toggleOneItem", { todoItem, index });
-    },
+    ...mapMutations({
+      // removeTodo: "removeOneItem({todoItem, index})",
+      removeTodo: "removeOneItem",
+      toggleComplete: "toggleOneItem",
+    }),
+    // removeTodo(todoItem, index) {
+    //   // this.$emit("removeItem", todoItem, index);
+    //   this.$store.commit("removeOneItem", { todoItem, index });
+    // },
+    // toggleComplete(todoItem, index) {
+    //   // this.$emit("toggleItem", todoItem, index);
+    //   this.$store.commit("toggleOneItem", { todoItem, index });
+    // },
   },
   computed: {
     // todoItems() {
