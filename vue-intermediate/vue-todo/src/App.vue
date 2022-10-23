@@ -1,13 +1,9 @@
 <template>
   <div id="app">
     <TodoHeader></TodoHeader>
-    <TodoInput @addTodoItem="addOneItem"></TodoInput>
-    <TodoList
-      v-bind:propsData="todoItems"
-      @removeItem="removeOneItem"
-      @toggleItem="toggleOneItem"
-    ></TodoList>
-    <TodoFooter @clearAll="clearAllItems"></TodoFooter>
+    <TodoInput></TodoInput>
+    <TodoList v-bind:propsData="todoItems"></TodoList>
+    <TodoFooter></TodoFooter>
   </div>
 </template>
 
@@ -22,32 +18,6 @@ export default {
     return {
       todoItems: [],
     };
-  },
-  methods: {
-    addOneItem(todoItem) {
-      const obj = {
-        completed: false,
-        item: todoItem,
-      };
-      // 저장하는 로직
-      localStorage.setItem(todoItem, JSON.stringify(obj));
-      this.todoItems.push(obj);
-    },
-    removeOneItem(todoItem, index) {
-      localStorage.removeItem(todoItem.item);
-      this.todoItems.splice(index, 1);
-    },
-    toggleOneItem(todoItem, index) {
-      // todoItem.completed = !todoItem.completed;
-      this.todoItems[index].completed = !this.todoItems[index].completed;
-      // localStorage 데이터 갱신, localStorage에 update는 없음
-      localStorage.removeItem(todoItem.item);
-      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
-    },
-    clearAllItems() {
-      localStorage.clear();
-      this.todoItems = [];
-    },
   },
   components: {
     TodoHeader,
