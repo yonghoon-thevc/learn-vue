@@ -30,10 +30,14 @@
 </template>
 
 <script setup>
-import { useCourse } from "~~/composables/useCourse";
-
 const course = useCourse();
 const route = useRoute();
+
+if (route.params.lessonSlug === "3-typing-component-events") {
+  console.log(
+    route.params.paramthatdoesnotexistwhoops.capitalizeIsNotAMethod()
+  );
+}
 
 const chapter = computed(() => {
   return course.chapters.find(
