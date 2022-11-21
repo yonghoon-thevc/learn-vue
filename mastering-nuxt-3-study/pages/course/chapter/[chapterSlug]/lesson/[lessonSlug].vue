@@ -30,11 +30,12 @@
 </template>
 
 <script setup>
+import { useCourse } from "~~/composables/useCourse";
 const course = useCourse();
 const route = useRoute();
 
 definePageMeta({
-  validate({ params }) {
+  middleware: ({ params }, from) => {
     const chapter = computed(() => {
       return course.chapters.find(
         (chapter) => chapter.slug === params.chapterSlug
@@ -42,10 +43,12 @@ definePageMeta({
     });
 
     if (!chapter.value) {
-      throw createError({
-        statusCode: 404,
-        message: "Chapter not found",
-      });
+      return abortNavigation(
+        createError({
+          statusCode: 404,
+          message: "Chapter not found",
+        })
+      );
     }
     const lesson = computed(() => {
       return chapter.value.lessons.find(
@@ -54,10 +57,12 @@ definePageMeta({
     });
 
     if (!lesson.value) {
-      throw createError({
-        statusCode: 404,
-        message: "Chapter not found",
-      });
+      return abortNavigation(
+        createError({
+          statusCode: 404,
+          message: "Lesson not found",
+        })
+      );
     }
 
     return true;
