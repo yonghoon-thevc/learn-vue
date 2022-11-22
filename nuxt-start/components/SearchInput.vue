@@ -1,21 +1,20 @@
 <template>
   <div>
-    <input type="text" />
+    <input
+      type="text"
+      :value="searchKeyword"
+      @input="$emit('input', $event.target.value)"
+    />
     <button>Search</button>
   </div>
 </template>
 <script>
 export default {
-  components: {},
-  data() {
-    return {
-      sampleData: '',
-    };
+  props: {
+    searchKeyword: {
+      type: String,
+      default: () => '',
+    },
   },
-  setup() {},
-  created() {},
-  mounted() {},
-  unmounted() {},
-  methods: {},
 };
 </script>
