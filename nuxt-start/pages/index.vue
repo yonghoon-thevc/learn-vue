@@ -1,9 +1,7 @@
 <template>
   <div class="app">
     <main>
-      <div>
-        <input type="text" />
-      </div>
+      <SearchInput></SearchInput>
       <ul>
         <li
           v-for="product in products"
@@ -26,6 +24,7 @@
 
 <script>
 import axios from 'axios';
+import SearchInput from '@/components/SearchInput.vue';
 
 export default {
   async asyncData() {
@@ -41,6 +40,7 @@ export default {
       this.$router.push(`detail/${id}`);
     },
   },
+  components: { SearchInput },
 };
 </script>
 
