@@ -1,9 +1,11 @@
 <template>
   <div class="app">
     <main>
+      <!-- :search-keyword="searchKeyword"
+      @input="updateSearchKeyword" -->
       <SearchInput
-        :search-keyword="searchKeyword"
-        @input="updateSearchKeyword"
+        v-model="searchKeyword"
+        @search="searchProducts"
       ></SearchInput>
       <ul>
         <li
@@ -28,6 +30,7 @@
 <script>
 import axios from 'axios';
 import SearchInput from '@/components/SearchInput.vue';
+import { fetchProductsByKeyword } from '~/api';
 
 export default {
   components: { SearchInput },
@@ -48,8 +51,11 @@ export default {
     moveToDetailPage(id) {
       this.$router.push(`detail/${id}`);
     },
-    updateSearchKeyword(keyword) {
-      this.searchKeyword = keyword;
+    async searchProducts() {
+      const response = await fetchProductsByKeyword(this.searchKeyword);
+      const products = response.data;
+      console.log(products);
+      return { products };
     },
   },
 };

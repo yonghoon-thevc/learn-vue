@@ -5,13 +5,13 @@
       :value="searchKeyword"
       @input="$emit('input', $event.target.value)"
     />
-    <button>Search</button>
+    <button type="button" @click="$emit('search')">Search</button>
   </div>
 </template>
 <script>
 export default {
   props: {
-    searchKeyword: {
+    value: {
       type: String,
       default: () => '',
     },
