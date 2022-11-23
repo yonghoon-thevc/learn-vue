@@ -31,8 +31,9 @@ export const actions = {
       }))
     );
   },
-  async nuxtServerInit(storeContext, nuxtContext) {
-    await storeContext.dispatch(FETCH_CART_ITEMS);
+  async nuxtServerInit({ dispatch }, nuxtContext) {
+    console.log('object');
+    await dispatch(FETCH_CART_ITEMS);
     // const { data } = await fetchCartItems();
     // storeContext.commit(
     //   'setCartItems',
