@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { fetchProductById } from '@/api/index';
+import { createCartItem, fetchProductById } from '@/api/index';
 
 export default {
   components: {},
@@ -31,7 +31,9 @@ export default {
   mounted() {},
   unmounted() {},
   methods: {
-    addToCart() {
+    async addToCart() {
+      const response = await createCartItem(this.product);
+      console.log(response);
       this.$store.commit('addCartItem', this.product);
       this.$router.push('/cart');
     },
