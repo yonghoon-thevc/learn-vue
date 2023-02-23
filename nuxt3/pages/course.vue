@@ -24,7 +24,20 @@
             </div>
 
             <div class="lesson">
-                <NuxtPage />
+                <NuxtErrorBoundary>
+                    <NuxtPage />
+                    <template #error="{error}">
+                        <p>
+                            Oh no, something broke!
+                            <code>{{ error }}</code>
+                        </p>
+                        <p>
+                            <button @click="resetError(error)">
+                                Reset
+                            </button>
+                        </p>
+                    </template>
+                </NuxtErrorBoundary>
             </div>
         </div>
     </div>
@@ -32,6 +45,11 @@
 
 <script setup>
 const {chapters} = useCourse();
+
+const resetError = async (error) => {
+    await navigateTo(`/course/chapter/1-chapter-1/lesson/1-introduction-to-typescript-with-Vue.js-3`)
+    error.value = null
+}
 
 // definePageMeta({
 //     layout: 'custom',
