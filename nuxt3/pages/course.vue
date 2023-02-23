@@ -32,6 +32,10 @@
 
 <script setup>
 const {chapters} = useCourse();
+
+// definePageMeta({
+//     layout: 'custom',
+// })
 </script>
 
 <style>
