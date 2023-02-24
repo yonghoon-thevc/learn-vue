@@ -3,7 +3,7 @@
     <div>
       <h1>
         <span>
-          <span>{{ title }}</span>
+          <span>{{ course.title }}</span>
         </span>
       </h1>
       <UserCard />
@@ -13,7 +13,7 @@
       <div class="chapter-list">
         <h3>Chapters</h3>
         <!-- All the lessons for the course listed here -->
-        <div v-for="chapter in chapters" :key="chapter.slug">
+        <div v-for="chapter in course.chapters" :key="chapter.slug">
           <h4>{{ chapter.title }}</h4>
           <a
             class="ch-lesson"
@@ -46,12 +46,11 @@
 </template>
 
 <script setup>
-const { chapters, title } = useCourse();
+const course = await useCourse();
+const firstLesson = await useFirstLesson();
 
 const resetError = async (error) => {
-  await navigateTo(
-    `/course/chapter/1-chapter-1/lesson/1-introduction-to-typescript-with-Vue.js-3`
-  );
+  await navigateTo(firstLesson.path);
   error.value = null;
 };
 

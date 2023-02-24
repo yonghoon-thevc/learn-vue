@@ -1,16 +1,29 @@
 {
   "private": true,
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  },
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "prisma": "prisma",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate",
+    "prisma:seed": "node prisma/seed.js"
   },
   "devDependencies": {
     "@nuxtjs/supabase": "^0.3.1",
+    "@prisma/client": "^4.10.1",
     "@vueuse/core": "^9.13.0",
     "@vueuse/nuxt": "^9.13.0",
     "nuxt": "^3.2.2"
-  }
+  },
+  "dependencies": {
+    "h3": "^1.5.0",
+    "prisma": "^4.10.1"
+  },
+  "type": "module"
 }

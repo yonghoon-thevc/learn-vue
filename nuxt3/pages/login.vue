@@ -1,12 +1,12 @@
 <template>
   <div>
-    <h1>Log in to {{ title }}</h1>
+    <h1>Log in to {{ course.title }}</h1>
     <button @click="login">Log in with github</button>
   </div>
 </template>
 
 <script setup lang="ts">
-const { title } = useCourse();
+const course = await useCourse();
 const { query } = useRoute();
 const { auth } = useSupabaseClient();
 const user = useSupabaseUser();
