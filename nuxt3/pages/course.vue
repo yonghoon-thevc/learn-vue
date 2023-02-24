@@ -6,6 +6,7 @@
           <span>{{ title }}</span>
         </span>
       </h1>
+      <UserCard />
     </div>
 
     <div class="chapter">
