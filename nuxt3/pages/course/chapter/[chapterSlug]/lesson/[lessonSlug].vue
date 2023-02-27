@@ -23,7 +23,6 @@
 </template>
 
 <script setup>
-import { courseProgress } from "~/stores/courseProgress.ts";
 import { useCourseProgress } from "~~/stores/courseProgress";
 const course = await useCourse();
 const route = useRoute();

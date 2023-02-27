@@ -4,7 +4,6 @@ export default async <T>(url: string) => {
   const cached = useSessionStorage<T>(url, null, {
     serializer: StorageSerializers.object,
   });
-
   if (!cached.value) {
     const { data, error } = await useFetch<T>(url, {
       headers: useRequestHeaders(["cookie"]),
